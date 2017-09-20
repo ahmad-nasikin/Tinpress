@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <form action="">
+        <input type="text" id="login-username">
+        <input type="text" id="login-password">
+        <input type="button" id="login-button" value="login">
+    </form>
+    <form action="">
+        <input type="text" id="register-username">
+        <input type="text" id="register-password">
+        <input type="button" id="register-button" value="register">
+    </form>
+
+
+
+    <script>
+        $('#register-button').click(function () {
+                axios.post('http://localhost:3000/signup', {
+                    username: $('#register-username').val(),
+                    password: $('#register-password').val()
+                })
+                    .then(data => {
+                        console.log('data masuk');
+                        alert('login please')
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            })
+
+        $('#login-button').click(function () {
+            axios.post('http://localhost:3000/signin', {
+                    username: $('#login-username').val(),
+                    password: $('#login-password').val()
+                })
+                .then(data => {
+                    console.log(data);
+                    localStorage.setItem('token', data.data)
+                    if (localStorage.getItem('token') !== 'nousername') {
+                        window.location.href = 'camera.html'
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+           
+        })
+
+        
+    </script>
+</body>
+
+</html>

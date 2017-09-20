@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src='https://code.jquery.com/jquery-3.2.1.js'> </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <input placeholder="insert your search here" id="new-search">
+    <input type="button" value='Post' onclick='search()'>
+
+    <div id="timeline"></div>
+    <script>
+    function search() {
+      // alert('hai')
+      axios.post('http://localhost:3000/spotify/search', {
+        search: $('#new-search').val()
+      })
+        .then(function (data) {
+          $('#timeline').empty();
+          // console.log('hasil SPOTIFY HTML search',data);
+          data.data.playlists.items.forEach( playlist => {
+              $('#timeline').append(`
+                <p>${playlist.name} <br>
+                <a href="${playlist.external_urls.spotify}">${playlist.external_urls.spotify}</a>
+                </p>
+                `
+              )
+          })
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        console.log('hai');
+    }
+      </script>
+  </body>
+</html>
