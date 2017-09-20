@@ -1,0 +1,30 @@
+{
+  "name": "tinpress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmadjx99/Tinpress.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmadjx99/Tinpress/issues"
+  },
+  "homepage": "https://github.com/ahmadjx99/Tinpress#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.1",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "fb": "^2.0.0",
+    "mongoose": "^4.11.12",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {}
+}
