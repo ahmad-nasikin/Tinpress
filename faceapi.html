@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detect Faces Sample</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    function processImage() {
+        // **********************************************
+        // *** Update or verify the following values. ***
+        // **********************************************
+
+        // Replace the subscriptionKey string value with your valid subscription key.
+        var subscriptionKey = "9d4109dd974c4d6a9b93387e6dcaff70";
+
+        // Replace or verify the region.
+        //
+        // You must use the same region in your REST API call as you used to obtain your subscription keys.
+        // For example, if you obtained your subscription keys from the westus region, replace
+        // "westcentralus" in the URI below with "westus".
+        //
+        // NOTE: Free trial subscription keys are generated in the westcentralus region, so if you are using
+        // a free trial subscription key, you should not need to change this region.
+        var uriBase = "https://southeastasia.api.cognitive.microsoft.com/face/v1.0/detect";
+
+        // Request parameters.
+        var params = {
+            "returnFaceId": "true",
+            "returnFaceLandmarks": "false",
+            "returnFaceAttributes": "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise",
+        };
+
+        // Display the image.
+        var sourceImageUrl = document.getElementById("inputImage").value;
+        document.querySelector("#sourceImage").src = sourceImageUrl;
+
+        // Perform the REST API call.
+        $.ajax({
+            url: uriBase + "?" + $.param(params),
+
+            // Request headers.
+            beforeSend: function(xhrObj){
+                xhrObj.setRequestHeader("Content-Type","application/json");
+                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            },
+
+            type: "POST",
+
+            // Request body.
+            data: '{"url": ' + '"' + sourceImageUrl + '"}',
+            processData: false
+        })
+
+        .done(function(data) {
+            // Show formatted JSON on webpage.
+            $("#responseTextArea").val(JSON.stringify(data, null, 2));
+        })
+
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            // Display error message.
+            var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+            errorString += (jqXHR.responseText === "") ? "" : (jQuery.parseJSON(jqXHR.responseText).message) ? 
+                jQuery.parseJSON(jqXHR.responseText).message : jQuery.parseJSON(jqXHR.responseText).error.message;
+            alert(errorString);
+        });
+
+        // function ProcessResult(response)
+        // {
+        //     var data = JSON.stringify(response);
+        //     emotion = ['anger','contempt','disgust','fear','happiness','neutral','sadness','surprise']
+
+        //     anger = parseFloat(response[0].scores.anger.toString().slice(0,7))
+        //     contempt = parseFloat(response[0].scores.contempt.toString().slice(0,7))
+        //     disgust = parseFloat(response[0].scores.disgust.toString().slice(0,7))
+        //     fear = parseFloat(response[0].scores.fear.toString().slice(0,7))
+        //     happiness= parseFloat(response[0].scores.happiness.toString().slice(0,7))
+        //     neutral =parseFloat(response[0].scores.neutral.toString().slice(0,7))
+        //     sadness = parseFloat(response[0].scores.sadness.toString().slice(0,7))
+        //     surprise = parseFloat(response[0].scores.surprise.toString().slice(0,7))
+
+        //     emotionValue = [anger,contempt,disgust,fear,happiness,neutral,sadness,surprise]
+        //     console.log(emotionValue.forEach(data=>{
+        //         console.log(data)
+        //     }));
+        //     return emotion[closest(emotionValue,1)];
+        // }
+        // function closest(list, x) {
+        //     var min,
+        //         chosen = list[0];
+        //     for (var i in list) {
+        //         min = Math.abs(chosen - x);
+        //         if (Math.abs(list[i] - x) < min) {
+        //             chosen = list[i];
+        //         }
+        //     }
+
+        //     return list.indexOf(chosen);
+        // }
+
+    };
+</script>
+
+<h1>Detect Faces:</h1>
+Enter the URL to an image that includes a face or faces, then click the <strong>Analyze face</strong> button.
+<br><br>
+Image to analyze: <input type="text" name="inputImage" id="inputImage" value="https://imgur.com/DQwNWRg.jpg" />
+<button onclick="processImage()">Analyze face</button>
+<br><br>
+<div id="wrapper" style="width:1020px; display:table;">
+    <div id="jsonOutput" style="width:600px; display:table-cell;">
+        Response:
+        <br><br>
+        <textarea id="responseTextArea" class="UIInput" style="width:580px; height:400px;"></textarea>
+    </div>
+    <div id="imageDiv" style="width:420px; display:table-cell;">
+        Source image:
+        <br><br>
+        <img id="sourceImage" width="400" />
+    </div>
+</div>
+</body>
+</html>
