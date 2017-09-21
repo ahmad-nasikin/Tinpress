@@ -11,6 +11,7 @@ const signup = function (req, res) {
       // req.body.password = hash;
       User.create({
         username: req.body.username,
+        email: req.body.email,
         password: hash
       })
       .then(() => {
@@ -37,7 +38,7 @@ const signin = function (req, res) {
         console.log('ini hasil compare',bcryptResult);
         if(bcryptResult){
           const token = jwt.sign({id: user._id, username: user.username}, process.env.JWT_SECRET);
-          res.send({token: token})
+          res.send(token)
         } else {
           res.send({msg: 'Password salah'})
         }
