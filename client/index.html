@@ -1,10 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Facebook Login JavaScript Example</title>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <title>Tinpress</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/form-elements.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Favicon and touch icons -->
+  <link rel="shortcut icon" href="assets/ico/favicon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <body>
+  <!-- Top content -->
+    <div class="top-content">
+
+      <div class="inner-bg">
+        <div class="container">
+          <div class="row">
+            <h2 id="judul">Tinpress</h2>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+              <div class="form-body">
+                <ul class="nav nav-tabs final-login">
+                  <li class="active"><a data-toggle="tab" href="#sectionA">Sign In</a></li>
+                  <li><a data-toggle="tab" href="#sectionB">Join us!</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div id="sectionA" class="tab-pane fade in active">
+                    <div class="innter-form">
+                      <div class="sa-innate-form">
+                        <label>Username</label>
+                        <input class="username" type="text" name="username">
+                        <label>Password</label>
+                        <input class="password" type="password" name="password">
+                        <button id="btn-signin" type="submit">Sign In</button>
+                      </div>
+                    </div>
+                    <div class="social-login">
+                      <p>- - - - - - - - - - - - - Sign In With - - - - - - - - - - - - - </p>
+                      <fb:login-button  size="xlarge" scope="public_profile,email" onlogin="checkLoginState();">
+                      </fb:login-button>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div id="sectionB" class="tab-pane fade">
+                    <div class="innter-form">
+                      <div class="sa-innate-form">
+                        <label>Username</label>
+                        <input class="username" type="text" name="username">
+                        <label>Email Address</label>
+                        <input class="email" type="text" name="email">
+                        <label>Password</label>
+                        <input class="password" type="password" name="password">
+                        <button id="btn-join" type="submit">Join now</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+<!-- Javascript -->
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.backstretch.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+
+<!--[if lt IE 10]>
+    <script src="assets/js/placeholder.js"></script>
+<![endif]-->
+
+<!-- FB Login Script -->
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -84,17 +169,53 @@
   }
 </script>
 
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
+<script>
+$('#btn-join').click(function(){
+	axios.post('http://localhost:3000/signup', {
+    username: $('.username').val(),
+    email: $('.email').val(),
+		password: $('.password').val()
+  })
+  .then(function (response) {
+    alert('silahkan login')
+    console.log('berhasil register', response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+})
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+$('#btn-signin').click(function() {
+	axios.post('http://localhost:3000/signin', {
+    username: $('.username').val(),
+    password: $('.password').val()
+  })
+  .then(function (response) {
+		alert('berhasil login')
+		localStorage.setItem('token', response.data)
+    console.log(response);
 
-<div id="status">
-</div>
+    var config = {
+			headers: {'token': localStorage.getItem('token')}
+		};
+  	if(config.headers != null)
+  	{
+  		axios.get('http://localhost:3000/users', config)
+  		.then(resp=>{
+  			console.log(resp)
+  			window.location.href = "main.html"
+  		})
+  		.catch(err=>{
+  			console.log(err)
+  		})
+	  }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+})
+
+</script>
 
 </body>
 </html>
