@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/tinpres');
 
 // const index = require('./routes/index');
+const signin = require('./routes/signin');
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.use('/', index)
+app.use('/signin', signin )
 
 
 app.listen(3000, () => {
