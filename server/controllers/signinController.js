@@ -11,7 +11,7 @@ module.exports = {
     .then( response => {
       if(response == null) {
         models.create({
-          fbid: response.id,
+          fbId: response.id,
           username: response.name,
           email: response.email
         })
