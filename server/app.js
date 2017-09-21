@@ -7,7 +7,7 @@ const logger = require('morgan');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/tinpres');
 
-// const index = require('./routes/index');
+const index = require('./routes/index');
 
 var app = express();
 
@@ -16,7 +16,7 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use('/', index)
+app.use('/', index)
 
 
 app.listen(3000, () => {
