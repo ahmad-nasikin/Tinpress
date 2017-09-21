@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Camera capture With JavaScript</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.js'> </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script>
+
+      (function () {
+        console.log('check login')
+        if (localStorage.getItem('token') == 'nousername' || !localStorage.getItem('token')) {
+          window.location.href = 'index.html'
+        }
+      })()
+    </script>
+</head>
+<body>
+
+
+
+<div align='center'>
+<img src="Logo.jpg" >
+<h1>Hi AWESOME</h1>
+<button type="button" id='logout' class="btn btn-danger">Log Out</button>
+</div>
+
+<div class="container">
+  <div class="app">
+    <a href="#" id="start-camera" class="visible">Touch here to start the app.</a>
+    <video id="camera-stream"></video>
+    <img id="snap">
+
+    <p id="error-message"></p>
+
+    <div class="controls">
+      <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
+      <a href="#" id="take-photo" title="Take Photo"><i class="material-icons">camera_alt</i></a>
+      <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled"><i class="material-icons">file_download</i></a>
+    </div>
+    <!-- Hidden canvas element. Used for taking snapshot of video. -->
+    
+    <canvas></canvas>
+  </div>
+  <br>
+  <div class="col">
+    <input type="file" id="filename" name="filename">
+    <button id="btn" class="btn">Process</button>
+    <p id="response"></p>
+    <div class="row">
+      <div class="col-4">
+        <iframe id="playlist" src="https://open.spotify.com/embed?uri=spotify:user:renataclarak:playlist:1jgnnyIyRUwZylP4H8CThe"
+        width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+      <div class="col-6">
+        <div id="timeline" class="col"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="assets/js/script.js"></script>
+<script src="assets/js/azureapi.js"></script>
+<script>
+   function changePlaylist (uri) {
+     $('#playlist').attr("src",`https://open.spotify.com/embed?uri=${uri}`);
+   }
+
+   $('#logout').click(function(){
+     localStorage.clear();
+     window.location.href = 'index.html';
+   })
+</script>
+</body>
+
+</html>
