@@ -27,7 +27,7 @@ $.ajax({
      var result = ProcessResult(response);
      console.log('ini emosi:' + result)
      if (result === 'happiness') {
-         $('#hasil').empty().append('<img src="https://imgur.com/V5nDF31.jpg" height="72px" width="72px">')
+         $('#hasil').empty().append('<img src="https://imgur.com/ReRgu1N.jpg" height="72px" width="72px">')
      } else {
         $('#hasil').empty().append('<img src="https://imgur.com/DdHuPH5.jpg" height="72px" width="72px">')
      }
