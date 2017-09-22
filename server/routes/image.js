@@ -6,6 +6,6 @@ const authHelper = require('../middlewares/authHelper');
 // authHelper.isLogin,
 router.get('/',  imgControllers.getImages)
 router.post('/', imgControllers.createImage)
-
+router.delete('/:id', imgControllers.removeImage)
 
 module.exports = router;

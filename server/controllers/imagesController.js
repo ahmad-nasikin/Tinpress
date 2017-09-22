@@ -19,8 +19,16 @@ const getImages = function (req, res) {
   .catch(err => res.send({msg: err.message}))
 }
 
+const removeImage = function (req, res) {
+ Image.deleteOne({
+   _id: req.params.id
+ })
+ .then(() => res.send({msg: 'image berhasil dihapus'}))
+ .catch(err => res.send({msg: err.message}))
+}
 
 module.exports = {
   createImage,
-  getImages
+  getImages,
+  removeImage
 }
