@@ -27,13 +27,10 @@ $.ajax({
      var result = ProcessResult(response);
      console.log('ini emosi:' + result)
      if (result === 'happiness') {
-        //  $('#hasil').remove()
-         $('#hasil').empty().append('Like')
+         $('#hasil').empty().append('<img src="https://imgur.com/V5nDF31.jpg" height="72px" width="72px">')
      } else {
-        // $('#hasil').remove()
-        $('#hasil').empty().append('Not Like')
+        $('#hasil').empty().append('<img src="https://imgur.com/DdHuPH5.jpg" height="72px" width="72px">')
      }
-    //  alert('fungis ini jalan');
    })
    .fail(function (error) {
      $("#response").text(error.getAllResponseHeaders());

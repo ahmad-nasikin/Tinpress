@@ -1,9 +1,9 @@
-
 /* form */
 body{
     background:#efefef;
 }
 #judul{
+  font-family: comic sans ms;
   text-align: center;
   color: white;
 }

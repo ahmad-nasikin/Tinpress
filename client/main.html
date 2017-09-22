@@ -13,13 +13,13 @@
       <link rel="stylesheet" href="assets/css/camera.css">
   </head>
   <body>
-      <div class="image">
+      <div class="image w3-content w3-display-container">
           <img class="mySlides" src="https://imgur.com/xHNklug.jpg" style="width:40%">
           <img class="mySlides" src="https://imgur.com/BHse1bm.jpg" style="width:40%">
           <img class="mySlides" src="https://imgur.com/ybE42Gj.jpg" style="width:40%">
           <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">Previous</button>
           <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">Next</button>
-      </div>
+      </div><br>
       <div id="hasil">
 
       </div>
@@ -51,9 +51,9 @@
             </div>
         
           </div>
-        
+          <button id="button" type="button" onclick="logout()">Logout</button>
         </div>
-    <button type="button" onclick="logout()">logout</button>
+    
     <script>
     $(document).ready(()=>{
      if (localStorage.getItem('token') || localStorage.getItem('fbtoken')) {
