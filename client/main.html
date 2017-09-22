@@ -9,10 +9,14 @@
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
       <script src='https://code.jquery.com/jquery-3.2.1.js'> </script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
       <link rel="stylesheet" href="assets/css/camera.css">
+      <link rel="stylesheet" href="assets/css/style2.css">
   </head>
   <body>
+    <div class="">
+
+    </div>
       <div class="image w3-content w3-display-container">
         <div class="gambar">
 
@@ -21,8 +25,8 @@
 
         </div>
         <br>
-        <button class="btn btn-primary center" onclick="plusDivs(-1)">Previous</button>
-        <button class="btn btn-primary center" onclick="plusDivs(1)">Next</button>
+        <button class="btn btn-info center" onclick="plusDivs(-1)">Previous</button>
+        <button class="btn btn-info center" onclick="plusDivs(1)">Next</button>
       </div><br>
       <div id="hasil">
 
@@ -55,7 +59,7 @@
             </div>
 
           </div>
-          <button id="button" type="button" onclick="logout()">Logout</button>
+          <button class="btn btn-danger" id="button" type="button" onclick="logout()">Logout</button>
         </div>
 
     <script>
@@ -80,6 +84,7 @@
   <script>
     axios.get('http://localhost:3000/images')
     .then(response => {
+      console.log('gambaranya ada? ', response)
       let data = response.data
       data.forEach((gambar, index) => {
         console.log(gambar, index)
@@ -92,5 +97,4 @@
       })
     })
   </script>
-
 </html>
