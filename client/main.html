@@ -9,19 +9,20 @@
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
       <script src='https://code.jquery.com/jquery-3.2.1.js'> </script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <link rel="stylesheet" href="assets/css/camera.css">
   </head>
   <body>
       <div class="image w3-content w3-display-container">
         <div class="gambar">
-          
+
           <!-- <img class="mySlides" src="https://imgur.com/BHse1bm.jpg" style="width:40%">
           <img class="mySlides" src="https://imgur.com/ybE42Gj.jpg" style="width:40%"> -->
-          
+
         </div>
-        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">Previous</button>
-        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">Next</button>
+        <br>
+        <button class="btn btn-primary center" onclick="plusDivs(-1)">Previous</button>
+        <button class="btn btn-primary center" onclick="plusDivs(1)">Next</button>
       </div><br>
       <div id="hasil">
 
@@ -31,9 +32,9 @@
             <a href="#" id="start-camera" class="visible">Touch here to start the app.</a>
             <video id="camera-stream"></video>
             <img id="snap">
-        
+
             <p id="error-message"></p>
-        
+
             <div class="controls">
               <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
               <a href="#" id="take-photo" title="Take Photo"><i class="material-icons">camera_alt</i></a>
@@ -52,11 +53,11 @@
                 <div id="timeline" class="col"></div>
               </div>
             </div>
-        
+
           </div>
           <button id="button" type="button" onclick="logout()">Logout</button>
         </div>
-    
+
     <script>
     $(document).ready(()=>{
      if (localStorage.getItem('token') || localStorage.getItem('fbtoken')) {
@@ -87,7 +88,7 @@
         } else {
           $('.gambar').append(`<img class="mySlides" src="${gambar.imgURL}" style="width:40%; display: none;">`)
         }
-        
+
       })
     })
   </script>
