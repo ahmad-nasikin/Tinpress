@@ -14,9 +14,11 @@
   </head>
   <body>
       <div class="image">
-        <button>Previous</button>
-        <img src="https://imgur.com/xHNklug.jpg" alt="">
-        <button>Next</button>
+          <img class="mySlides" src="https://imgur.com/xHNklug.jpg" style="width:40%">
+          <img class="mySlides" src="https://imgur.com/BHse1bm.jpg" style="width:40%">
+          <img class="mySlides" src="https://imgur.com/ybE42Gj.jpg" style="width:40%">
+          <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">Previous</button>
+          <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">Next</button>
       </div>
       <div id="hasil">
 
@@ -55,6 +57,7 @@
 
   </body>
 
+  <script src="assets/js/next.js"></script>
   <script src="assets/js/camera.js"></script>
   <script src="assets/js/azureapi.js"></script>
   <script>
