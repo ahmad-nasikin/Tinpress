@@ -54,20 +54,24 @@
         
         </div>
     <button type="button" onclick="logout()">logout</button>
+    <script>
+    $(document).ready(()=>{
+     if (localStorage.getItem('token') || localStorage.getItem('fbtoken')) {
 
+     } else {
+       window.location.href='index.html'
+     }
+   })
+    </script>
+    <script>
+    function logout() {
+      localStorage.clear();
+      window.location.href='index.html';
+    }
+    </script>
   </body>
-
   <script src="assets/js/next.js"></script>
   <script src="assets/js/camera.js"></script>
   <script src="assets/js/azureapi.js"></script>
-  <script>
-  var config = {
-    headers: {'token': localStorage.getItem('fbtoken')}
-  }
-  function logout() {
-    localStorage.removeItem('fbtoken')
-    localStorage.removeItem('userID')
-    window.location.href='index.html'
-  }
-  </script>
+
 </html>
