@@ -42,10 +42,13 @@
                     <div class="innter-form">
                       <div class="sa-innate-form">
                         <label>Username</label>
-                        <input class="username" type="text" name="username">
+                        <input id="username-in" type="text" name="username">
                         <label>Password</label>
-                        <input class="password" type="password" name="password">
+                        <input id="password-in" type="password" name="password">
                         <button id="btn-signin" type="submit">Sign In</button>
+                      </div>
+                      <div id="error">
+
                       </div>
                     </div>
                     <div class="social-login">
@@ -59,11 +62,11 @@
                     <div class="innter-form">
                       <div class="sa-innate-form">
                         <label>Username</label>
-                        <input class="username" type="text" name="username">
+                        <input id="username-join" type="text" name="username">
                         <label>Email Address</label>
-                        <input class="email" type="text" name="email">
+                        <input id="email-join" type="text" name="email">
                         <label>Password</label>
-                        <input class="password" type="password" name="password">
+                        <input id="password-join" type="password" name="password">
                         <button id="btn-join" type="submit">Join now</button>
                       </div>
                     </div>
@@ -151,13 +154,13 @@
   }
 
 </script>
-  
+
 <script>
 $('#btn-join').click(function(){
 	axios.post('http://localhost:3000/signup', {
-    username: $('.username').val(),
-    email: $('.email').val(),
-		password: $('.password').val()
+    username: $('#username-join').val(),
+    email: $('#email-join').val(),
+		password: $('#password-join').val()
   })
   .then(function (response) {
     alert('silahkan login')
@@ -170,20 +173,20 @@ $('#btn-join').click(function(){
 
 $('#btn-signin').click(function() {
 	axios.post('http://localhost:3000/signin', {
-    username: $('.username').val(),
-    password: $('.password').val()
+    username: $('#username-in').val(),
+    password: $('#password-in').val()
   })
   .then(function (response) {
+    console.log(response);
 		alert('berhasil login')
 		localStorage.setItem('token', response.data)
-    console.log(response);
 
     var config = {
 			headers: {'token': localStorage.getItem('token')}
 		};
   	if(config.headers != null)
   	{
-  		axios.get('http://localhost:3000/users', config)
+  		axios.get('http://localhost:3000/images', config)
   		.then(resp=>{
   			console.log(resp)
   			window.location.href = "main.html"
@@ -194,6 +197,7 @@ $('#btn-signin').click(function() {
 	  }
   })
   .catch(function (error) {
+    $('#error').empty().append('Username atau password salah')
     console.log(error);
   });
 })

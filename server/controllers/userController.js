@@ -28,7 +28,7 @@ const signin = function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
   if(!req.body.username || !req.body.password){
-    res.send({msg: 'Silahkan masukan username dan password'})
+    res.status(401).send({msg: 'Silahkan masukan username dan password'})
   } else {
     User.findOne({username: req.body.username})
     .then(user => {
@@ -40,12 +40,12 @@ const signin = function (req, res) {
           const token = jwt.sign({id: user._id, username: user.username}, process.env.JWT_SECRET);
           res.send(token)
         } else {
-          res.send({msg: 'Password salah'})
+          res.status(401).send({msg: 'Password salah'})
         }
       })
     })
     .catch(err => {
-      res.send({msg: 'username tidak ditemukan'})
+      res.status(401).send({msg: 'username tidak ditemukan'})
     })
   }
 }
