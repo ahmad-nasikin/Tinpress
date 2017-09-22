@@ -14,11 +14,14 @@
   </head>
   <body>
       <div class="image w3-content w3-display-container">
-          <img class="mySlides" src="https://imgur.com/xHNklug.jpg" style="width:40%">
-          <img class="mySlides" src="https://imgur.com/BHse1bm.jpg" style="width:40%">
-          <img class="mySlides" src="https://imgur.com/ybE42Gj.jpg" style="width:40%">
-          <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">Previous</button>
-          <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">Next</button>
+        <div class="gambar">
+          
+          <!-- <img class="mySlides" src="https://imgur.com/BHse1bm.jpg" style="width:40%">
+          <img class="mySlides" src="https://imgur.com/ybE42Gj.jpg" style="width:40%"> -->
+          
+        </div>
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">Previous</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">Next</button>
       </div><br>
       <div id="hasil">
 
@@ -73,5 +76,20 @@
   <script src="assets/js/next.js"></script>
   <script src="assets/js/camera.js"></script>
   <script src="assets/js/azureapi.js"></script>
+  <script>
+    axios.get('http://localhost:3000/images')
+    .then(response => {
+      let data = response.data
+      data.forEach((gambar, index) => {
+        console.log(gambar, index)
+        if(index === 0) {
+          $('.gambar').append(`<img class="mySlides" src="${gambar.imgURL}" style="width:40%">`)
+        } else {
+          $('.gambar').append(`<img class="mySlides" src="${gambar.imgURL}" style="width:40%; display: none;">`)
+        }
+        
+      })
+    })
+  </script>
 
 </html>
